@@ -163,23 +163,21 @@ result appropriately returned.
 What is calc_option's function signature? Implement calc_option.
 ......................................................................*)
 
-let calc_option (f : 'a -> 'b -> 'c) (a : 'a) (b : 'b) : 'c =
+let calc_option (f : 'a option -> 'b option -> 'c option) (a : 'a option) (b : 'b option) : ('c option) =
   match a, b with
   | None, None -> None
   | a, None -> a
   | None, b -> b
-  | a, b -> f a b;;
+  | a, b -> (f a b);;
      
 (*......................................................................
 Exercise 8: Now rewrite min_option and max_option using the higher-order
 function calc_option. Call them min_option_2 and max_option_2.
 ......................................................................*)
   
-let min_option_2 =
-  fun _ -> failwith "min_option_2 not implemented" ;;
+let min_option_2 (x : int option) (y : int option) : int option = calc_option min x y;;
      
-let max_option_2 =
-  fun _ -> failwith "max_option_2 not implemented" ;;
+let max_option_2 (x : int option) (y : int option) : int option = calc_option max x y;;
 
 (*......................................................................
 Exercise 9: Now that we have calc_option, we can use it in other
